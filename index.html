@@ -180,10 +180,10 @@
       50%       { box-shadow: 0 0 0 7px rgba(232,64,90,0); }
     }
 
-    /* ── HERO ── */
+    /* ── HERO — left-aligned asymmetric (DESIGN_VARIANCE 8) ── */
     #hero {
       padding: clamp(72px, 15vw, 112px) 0 clamp(56px, 12vw, 80px);
-      text-align: center;
+      text-align: left;
     }
 
     #hero h1 {
@@ -194,9 +194,7 @@
       letter-spacing: -0.03em;
       color: #fff;
       margin-bottom: 22px;
-      max-width: 600px;
-      margin-left: auto;
-      margin-right: auto;
+      max-width: 560px;
     }
     #hero h1 em {
       font-style: normal;
@@ -209,63 +207,50 @@
     .subtitle {
       font-size: clamp(0.93rem, 2.5vw, 1.05rem);
       color: var(--text-sub);
-      max-width: 500px;
-      margin: 0 auto 40px;
+      max-width: 480px;
+      margin: 0 0 28px;
       line-height: 1.75;
       font-weight: 400;
     }
 
-    /* ── DATE BLOCK — double-bezel ── */
-    .date-shell {
-      background: rgba(255,255,255,0.03);
-      border: 1px solid var(--hairline);
-      border-radius: 20px;
-      padding: 6px;
-      max-width: 380px;
-      width: 100%;
-      margin: 0 auto 36px;
+    /* Hero meta row — date inline with badge */
+    .hero-meta {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 32px;
+    }
+    .hero-date-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      background: var(--surface-1);
+      border: 1px solid var(--hairline-hi);
+      border-radius: 100px;
+      padding: 6px 14px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--text);
       box-shadow: var(--inset-hi);
     }
-    .date-core {
-      background: var(--surface-1);
-      border-radius: 14px;
-      padding: 18px 22px;
-      box-shadow: inset 0 1px 1px rgba(255,255,255,0.07);
-    }
-    .date-main {
-      font-family: 'Syne', sans-serif;
-      font-size: 0.95rem;
-      font-weight: 700;
-      color: #fff;
-      margin-bottom: 14px;
-      letter-spacing: -0.01em;
-    }
-    .times {
+    .hero-times {
       display: flex;
-      justify-content: center;
-      gap: clamp(14px, 5vw, 28px);
+      align-items: center;
+      gap: 12px;
       flex-wrap: wrap;
     }
-    .time-item {
-      display: flex;
-      flex-direction: column;
+    .hero-time-chip {
+      display: inline-flex;
       align-items: center;
-      gap: 3px;
-    }
-    .time-item .flag { font-size: 1rem; }
-    .time-item .hour {
-      font-size: 0.92rem;
-      font-weight: 700;
-      color: #fff;
-      letter-spacing: -0.01em;
-    }
-    .time-item .zone {
-      font-size: 0.68rem;
+      gap: 5px;
+      font-size: 0.75rem;
+      font-weight: 600;
       color: var(--text-sub);
-      font-weight: 500;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
     }
+    .hero-time-chip .t { color: var(--text); }
+
+    /* ── DATE BLOCK removed — replaced by hero-meta inline chips ── */
 
     /* ── CTA BUTTON — button-in-button architecture ── */
     .btn-wa {
@@ -544,8 +529,8 @@
       line-height: 1.7;
     }
 
-    /* ── CTA FINAL ── */
-    #cta-final { text-align: center; }
+    /* ── CTA FINAL — left aligned, asymmetric ── */
+    #cta-final { text-align: left; }
 
     #cta-final .headline {
       font-family: 'Syne', sans-serif;
@@ -565,7 +550,7 @@
     }
     .btn-center {
       display: flex;
-      justify-content: center;
+      justify-content: flex-start;
     }
 
     /* ── FOOTER ── */
@@ -619,32 +604,20 @@
         Clase en vivo donde te demuestro en tiempo real cómo crear 30 días de contenido en una sola tarde usando IA — con una demo en vivo para alguien del público.
       </p>
 
-      <!-- Date double-bezel -->
-      <div class="date-shell enter enter-d3">
-        <div class="date-core">
-          <div class="date-main">📅 Martes 31 de marzo, 2026</div>
-          <div class="times">
-            <div class="time-item">
-              <span class="flag">🇻🇪</span>
-              <span class="hour">8:00 PM</span>
-              <span class="zone">Venezuela</span>
-            </div>
-            <div class="time-item">
-              <span class="flag">🇨🇴</span>
-              <span class="hour">7:00 PM</span>
-              <span class="zone">Colombia</span>
-            </div>
-            <div class="time-item">
-              <span class="flag">🇦🇷</span>
-              <span class="hour">9:00 PM</span>
-              <span class="zone">Argentina</span>
-            </div>
-          </div>
+      <!-- Date chips — inline horizontal, left-aligned -->
+      <div class="hero-meta enter enter-d3">
+        <span class="hero-date-pill">
+          📅 Martes 31 de marzo, 2026
+        </span>
+        <div class="hero-times">
+          <span class="hero-time-chip">🇻🇪 <span class="t">8PM</span></span>
+          <span class="hero-time-chip">🇨🇴 <span class="t">7PM</span></span>
+          <span class="hero-time-chip">🇦🇷 <span class="t">9PM</span></span>
         </div>
       </div>
 
-      <!-- CTA — button-in-button -->
-      <div class="enter enter-d4" style="display:flex;flex-direction:column;align-items:center;">
+      <!-- CTA — button-in-button, left-aligned -->
+      <div class="enter enter-d4" style="display:flex;flex-direction:column;align-items:flex-start;">
         <a
           href="https://chat.whatsapp.com/LKlt7m2hPDYL85AOeHkSjM?mode=hq2tcli"
           target="_blank"
@@ -665,7 +638,7 @@
             </svg>
           </span>
         </a>
-        <p class="btn-sub enter enter-d5">
+        <p class="btn-sub enter enter-d5" style="text-align:left;">
           <strong>Gratis</strong> · Sin compromiso · Recibirás el link de la clase en el grupo
         </p>
       </div>
@@ -874,7 +847,7 @@
         </a>
       </div>
 
-      <p class="btn-sub enter enter-d3" style="margin-top:14px;">
+      <p class="btn-sub enter enter-d3" style="margin-top:14px;text-align:left;">
         <strong>Gratis</strong> · Recibirás el link de la clase en el grupo
       </p>
 
