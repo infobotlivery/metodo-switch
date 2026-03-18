@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Clase en vivo gratuita: Método Switch — Tu contenido del mes listo en 1 tarde, sin ser experto hablándole a la IA. Martes 31 de marzo, 2026." />
+  <title>Método Switch — Clase en Vivo Gratuita</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ── RESET & BASE ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:       #0a0a0f;
+      --card:     #111118;
+      --red:      #e94560;
+      --cyan:     #06d6a0;
+      --text:     #e8e8f0;
+      --muted:    #7a7a9a;
+      --border:   rgba(255,255,255,0.07);
+      --max:      680px;
+      --r-card:   12px;
+      --r-pill:   100px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+      min-height: 100vh;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* Grain overlay */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
+      opacity: 0.028;
+      pointer-events: none;
+      z-index: 1000;
+    }
+
+    /* Hero glow */
+    body::after {
+      content: '';
+      position: fixed;
+      top: -200px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 800px;
+      height: 600px;
+      background: radial-gradient(ellipse, rgba(233,69,96,0.12) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ── LAYOUT ── */
+    .wrapper {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 0 20px;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ── SECTION DIVIDERS ── */
+    .divider {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.06), transparent);
+      margin: 0;
+    }
+
+    /* ── ANIMATIONS ── */
+    .fade-up { opacity: 0; transform: translateY(32px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .fade-down { opacity: 0; transform: translateY(-24px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .scale-in { opacity: 0; transform: scale(0.92); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .visible { opacity: 1 !important; transform: none !important; }
+
+    /* ── TYPOGRAPHY ── */
+    .display { font-family: 'Syne', sans-serif; line-height: 1.1; }
+    h2.section-title { font-family: 'Syne', sans-serif; font-size: clamp(1.5rem, 4vw, 2rem); font-weight: 800; line-height: 1.2; }
+    .label {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 14px;
+    }
+
+    /* ── BADGE ANIMADO ── */
+    .badge-live {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(233,69,96,0.12);
+      border: 1px solid rgba(233,69,96,0.3);
+      color: var(--red);
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 7px 16px;
+      border-radius: var(--r-pill);
+      margin-bottom: 28px;
+    }
+    .dot {
+      width: 7px;
+      height: 7px;
+      background: var(--red);
+      border-radius: 50%;
+      animation: pulse 1.8s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(233,69,96,0.6); }
+      50% { box-shadow: 0 0 0 6px rgba(233,69,96,0); }
+    }
+
+    /* ── HERO ── */
+    #hero {
+      padding: 80px 0 60px;
+      text-align: center;
+    }
+    #hero h1 {
+      font-size: clamp(1.9rem, 5.5vw, 2.8rem);
+      font-weight: 800;
+      margin-bottom: 20px;
+      color: #fff;
+    }
+    #hero h1 em {
+      font-style: normal;
+      background: linear-gradient(90deg, var(--red), #ff7b8c);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .subtitle {
+      font-size: clamp(0.97rem, 2.5vw, 1.08rem);
+      color: var(--muted);
+      max-width: 560px;
+      margin: 0 auto 36px;
+      line-height: 1.7;
+    }
+
+    /* Fecha / horarios */
+    .date-block {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--r-card);
+      padding: 18px 24px;
+      margin: 0 auto 36px;
+      max-width: 400px;
+    }
+    .date-main {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 10px;
+    }
+    .times {
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+    .time-item {
+      font-size: 0.88rem;
+      color: var(--text);
+    }
+    .time-item span {
+      color: var(--muted);
+      font-size: 0.78rem;
+      display: block;
+    }
+
+    /* ── BOTÓN WHATSAPP ── */
+    .btn-wa {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      background: var(--red);
+      color: #fff;
+      font-family: 'Inter', sans-serif;
+      font-size: 1rem;
+      font-weight: 600;
+      text-decoration: none;
+      padding: 17px 36px;
+      border-radius: var(--r-pill);
+      border: none;
+      cursor: pointer;
+      width: 100%;
+      max-width: 400px;
+      box-shadow: 0 0 32px rgba(233,69,96,0.35), 0 4px 16px rgba(233,69,96,0.2);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    .btn-wa::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(255,255,255,0.08) 0%, transparent 100%);
+    }
+    .btn-wa:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 0 48px rgba(233,69,96,0.5), 0 8px 24px rgba(233,69,96,0.3);
+    }
+    .btn-wa:active { transform: translateY(0); }
+    .btn-wa svg { flex-shrink: 0; }
+    .btn-sub {
+      margin-top: 12px;
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+    .btn-sub strong { color: var(--cyan); font-weight: 500; }
+
+    /* ── SECTION BASE ── */
+    section { padding: 64px 0; }
+
+    /* ── QUÉ VAS A VER ── */
+    .cards-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 14px;
+      margin-top: 32px;
+    }
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--r-card);
+      padding: 22px 24px;
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+      transition: border-color 0.25s ease, transform 0.25s ease;
+    }
+    .card:hover {
+      border-color: rgba(233,69,96,0.25);
+      transform: translateY(-2px);
+    }
+    .card-icon {
+      font-size: 1.5rem;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .card-body h3 {
+      font-family: 'Syne', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 5px;
+    }
+    .card-body p {
+      font-size: 0.9rem;
+      color: var(--muted);
+      line-height: 1.55;
+    }
+
+    /* ── PARA QUIÉN ES ── */
+    .checklist {
+      list-style: none;
+      margin-top: 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .checklist li {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      font-size: 0.97rem;
+      color: var(--text);
+      line-height: 1.5;
+    }
+    .check-icon {
+      flex-shrink: 0;
+      width: 22px;
+      height: 22px;
+      background: rgba(6,214,160,0.12);
+      border: 1px solid rgba(6,214,160,0.3);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 1px;
+    }
+    .check-icon svg { display: block; }
+
+    /* ── SPEAKER ── */
+    .speaker-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--r-card);
+      padding: 28px;
+      display: flex;
+      gap: 22px;
+      align-items: flex-start;
+      margin-top: 28px;
+    }
+    .avatar {
+      width: 68px;
+      height: 68px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--red), #3a86ff);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Syne', sans-serif;
+      font-size: 1.3rem;
+      font-weight: 800;
+      color: #fff;
+      flex-shrink: 0;
+      box-shadow: 0 0 24px rgba(233,69,96,0.3);
+    }
+    .speaker-info h3 {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: #fff;
+      margin-bottom: 3px;
+    }
+    .speaker-role {
+      font-size: 0.8rem;
+      color: var(--red);
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+    .speaker-bio {
+      font-size: 0.9rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    /* ── URGENCIA ── */
+    .urgency-card {
+      background: linear-gradient(135deg, rgba(233,69,96,0.07), rgba(233,69,96,0.03));
+      border: 1px solid rgba(233,69,96,0.2);
+      border-radius: var(--r-card);
+      padding: 26px 28px;
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+      margin-top: 0;
+    }
+    .urgency-icon { font-size: 1.4rem; flex-shrink: 0; margin-top: 2px; }
+    .urgency-text { font-size: 0.97rem; color: var(--text); line-height: 1.65; }
+
+    /* ── CTA FINAL ── */
+    #cta-final {
+      text-align: center;
+    }
+    #cta-final .headline {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(1.4rem, 4vw, 1.9rem);
+      font-weight: 800;
+      color: #fff;
+      margin-bottom: 12px;
+    }
+    #cta-final .subline {
+      font-size: 0.9rem;
+      color: var(--muted);
+      margin-bottom: 32px;
+    }
+    .btn-center {
+      display: flex;
+      justify-content: center;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      padding: 40px 0 48px;
+      text-align: center;
+    }
+    .footer-replay {
+      font-size: 0.88rem;
+      color: var(--muted);
+      margin-bottom: 14px;
+      line-height: 1.6;
+    }
+    .footer-replay .accent { color: var(--red); font-weight: 600; }
+    .footer-copy {
+      font-size: 0.78rem;
+      color: rgba(122,122,154,0.5);
+      letter-spacing: 0.05em;
+    }
+
+    /* ── STAGGER DELAYS ── */
+    .stagger-1 { transition-delay: 0.05s; }
+    .stagger-2 { transition-delay: 0.12s; }
+    .stagger-3 { transition-delay: 0.19s; }
+    .stagger-4 { transition-delay: 0.26s; }
+
+    /* ── MOBILE ── */
+    @media (min-width: 540px) {
+      .cards-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 480px) {
+      #hero { padding: 60px 0 50px; }
+      .speaker-card { flex-direction: column; }
+      .times { gap: 14px; }
+      .btn-wa { font-size: 0.95rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ══════════════ HERO ══════════════ -->
+  <section id="hero">
+    <div class="wrapper">
+
+      <div class="badge-live fade-down">
+        <span class="dot"></span>
+        Clase en vivo gratuita
+      </div>
+
+      <h1 class="display fade-up">
+        Método Switch — Tu contenido del mes listo en <em>1 tarde</em>, sin ser experto hablándole a la IA
+      </h1>
+
+      <p class="subtitle fade-up stagger-1">
+        Clase en vivo donde te demuestro en tiempo real cómo crear 30 días de contenido en una sola tarde usando IA — con una demo en vivo para alguien del público.
+      </p>
+
+      <div class="date-block fade-up stagger-2">
+        <div class="date-main">📅 Martes 31 de marzo, 2026</div>
+        <div class="times">
+          <div class="time-item">🇻🇪 <strong>8:00 PM</strong><span>Venezuela</span></div>
+          <div class="time-item">🇨🇴 <strong>7:00 PM</strong><span>Colombia</span></div>
+          <div class="time-item">🇦🇷 <strong>9:00 PM</strong><span>Argentina</span></div>
+        </div>
+      </div>
+
+      <div class="fade-up stagger-3" style="display:flex;flex-direction:column;align-items:center;">
+        <a href="https://chat.whatsapp.com/LKlt7m2hPDYL85AOeHkSjM?mode=hq2tcli" target="_blank" rel="noopener" class="btn-wa">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z" fill="currentColor"/>
+          </svg>
+          Únete al grupo de WhatsApp
+        </a>
+        <p class="btn-sub">
+          <strong>Gratis</strong> · Sin compromiso · Recibirás el link de la clase en el grupo
+        </p>
+      </div>
+
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ══════════════ QUÉ VAS A VER ══════════════ -->
+  <section id="que-vas-a-ver">
+    <div class="wrapper">
+      <span class="label fade-up">Qué vas a ver en esta clase</span>
+      <h2 class="section-title fade-up stagger-1">60 minutos que van a cambiar<br>cómo creas contenido</h2>
+
+      <div class="cards-grid">
+
+        <div class="card scale-in stagger-1">
+          <div class="card-icon">📅</div>
+          <div class="card-body">
+            <h3>30 días de contenido en 1 tarde</h3>
+            <p>Cómo tener tu mes completo planificado sin improvisar ni depender de la inspiración.</p>
+          </div>
+        </div>
+
+        <div class="card scale-in stagger-2">
+          <div class="card-icon">🔴</div>
+          <div class="card-body">
+            <h3>Demo en vivo para alguien del público</h3>
+            <p>Voy a crear el contenido del mes para un asistente en tiempo real. Puede ser para TU negocio.</p>
+          </div>
+        </div>
+
+        <div class="card scale-in stagger-3">
+          <div class="card-icon">🧠</div>
+          <div class="card-body">
+            <h3>Por qué no eres inconstante</h3>
+            <p>La verdadera razón por la que no publicas todos los días — y el sistema que lo resuelve.</p>
+          </div>
+        </div>
+
+        <div class="card scale-in stagger-4">
+          <div class="card-icon">🎙️</div>
+          <div class="card-body">
+            <h3>Que la IA escriba con TU voz</h3>
+            <p>Tu contenido va a sonar a ti, no a robot genérico. Te muestro cómo.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ══════════════ PARA QUIÉN ES ══════════════ -->
+  <section id="para-quien">
+    <div class="wrapper">
+      <span class="label fade-up">¿Esto es para ti?</span>
+      <h2 class="section-title fade-up stagger-1">Esta clase es para ti si...</h2>
+
+      <ul class="checklist">
+
+        <li class="fade-up stagger-1">
+          <span class="check-icon">
+            <svg width="12" height="9" viewBox="0 0 12 9" fill="none">
+              <path d="M1 4L4.5 7.5L11 1" stroke="#06d6a0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </span>
+          Creas contenido pero te toma demasiado tiempo y no eres constante.
+        </li>
+
+        <li class="fade-up stagger-2">
+          <span class="check-icon">
+            <svg width="12" height="9" viewBox="0 0 12 9" fill="none">
+              <path d="M1 4L4.5 7.5L11 1" stroke="#06d6a0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </span>
+          Ya usaste ChatGPT pero sientes que no lo aprovechas o te da respuestas genéricas.
+        </li>
+
+        <li class="fade-up stagger-3">
+          <span class="check-icon">
+            <svg width="12" height="9" viewBox="0 0 12 9" fill="none">
+              <path d="M1 4L4.5 7.5L11 1" stroke="#06d6a0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </span>
+          Quieres que la IA trabaje para ti pero no sabes por dónde empezar sin marearte con 100 herramientas.
+        </li>
+
+        <li class="fade-up stagger-4">
+          <span class="check-icon">
+            <svg width="12" height="9" viewBox="0 0 12 9" fill="none">
+              <path d="M1 4L4.5 7.5L11 1" stroke="#06d6a0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </span>
+          Estás cansado/a de trabajar todo el día y sentir que no avanzas.
+        </li>
+
+      </ul>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ══════════════ SPEAKER ══════════════ -->
+  <section id="speaker">
+    <div class="wrapper">
+      <span class="label fade-up">Tu host</span>
+
+      <div class="speaker-card fade-up stagger-1">
+        <div class="avatar">RM</div>
+        <div class="speaker-info">
+          <h3>El Rapero Marketero</h3>
+          <div class="speaker-role">Creador del Método Switch</div>
+          <p class="speaker-bio">
+            Joven venezolano que a sus 27 años ha ayudado con su agencia a automatizar más de 100 empresas en todo LATAM. Ha capacitado a más de 20,000 personas con sus conferencias en 5 países.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ══════════════ URGENCIA ══════════════ -->
+  <section id="urgencia" style="padding-top:40px;padding-bottom:40px;">
+    <div class="wrapper">
+      <div class="urgency-card scale-in">
+        <div class="urgency-icon">⚡</div>
+        <p class="urgency-text">
+          <strong style="color:#fff;">Cupos limitados.</strong> Voy a hacer una demo en vivo personalizada para alguien del público. Para poder dar atención real, los lugares son limitados.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ══════════════ CTA FINAL ══════════════ -->
+  <section id="cta-final">
+    <div class="wrapper">
+      <h2 class="headline fade-up">
+        ¿Cuántas horas más vas a perder haciendo contenido en modo manual?
+      </h2>
+      <p class="subline fade-up stagger-1">
+        31 de marzo · 8PM VEN · 7PM COL · 9PM ARG
+      </p>
+
+      <div class="btn-center fade-up stagger-2">
+        <a href="https://chat.whatsapp.com/LKlt7m2hPDYL85AOeHkSjM?mode=hq2tcli" target="_blank" rel="noopener" class="btn-wa">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z" fill="currentColor"/>
+          </svg>
+          Únete al grupo de WhatsApp
+        </a>
+      </div>
+      <div style="text-align:center;">
+        <p class="btn-sub fade-up stagger-3">
+          <strong>Gratis</strong> · Recibirás el link de la clase en el grupo
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ══════════════ FOOTER ══════════════ -->
+  <footer>
+    <div class="wrapper">
+      <p class="footer-replay">
+        ¿No puedes estar en vivo? Únete al grupo y recibirás la repetición —
+        <span class="accent">disponible solo 24 horas.</span>
+      </p>
+      <p class="footer-copy">El Crew × Método Switch · 2026</p>
+    </div>
+  </footer>
+
+  <!-- ══════════════ JS ══════════════ -->
+  <script>
+    // IntersectionObserver para animaciones de entrada
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+    document.querySelectorAll('.fade-up, .fade-down, .scale-in').forEach(el => {
+      observer.observe(el);
+    });
+
+    // Activar inmediatamente los elementos del hero
+    document.querySelectorAll('#hero .fade-up, #hero .fade-down').forEach(el => {
+      setTimeout(() => el.classList.add('visible'), 80);
+    });
+  </script>
+
+</body>
+</html>
