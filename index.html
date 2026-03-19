@@ -607,11 +607,13 @@
         <span class="hud-br" aria-hidden="true"></span>
         <video
           class="hero-video"
-          src="hero-video.mp4"
-          autoplay muted loop playsinline
-          preload="auto"
+          autoplay muted loop playsinline webkit-playsinline
+          preload="metadata"
           aria-hidden="true"
-        ></video>
+          id="hero-vid"
+        >
+          <source src="hero-video.mp4" type="video/mp4">
+        </video>
       </div>
     </div>
 
@@ -931,6 +933,21 @@
       document.querySelectorAll('#hero .up, footer .up').forEach(el => el.classList.add('on'));
     });
   });
+
+  /* ── Force video autoplay (iOS Safari) ── */
+  const vid = document.getElementById('hero-vid');
+  if (vid) {
+    vid.muted = true;
+    const tryPlay = () => vid.play().catch(() => {});
+    vid.addEventListener('canplay', tryPlay, { once: true });
+    vid.addEventListener('loadedmetadata', tryPlay, { once: true });
+    tryPlay();
+    // iOS Safari sometimes needs a user gesture hint — retry on first touch
+    document.addEventListener('touchstart', function iosUnlock() {
+      vid.play().catch(() => {});
+      document.removeEventListener('touchstart', iosUnlock);
+    }, { once: true });
+  }
 
   /* ── Card spotlight ── */
   document.querySelectorAll('.card').forEach(card => {
