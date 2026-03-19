@@ -4,28 +4,37 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="Clase en vivo gratuita: Método Switch — Tu contenido del mes listo en 1 tarde. Martes 31 de marzo, 2026." />
-  <meta property="og:title" content="Método Switch — Clase en Vivo" />
-  <meta property="og:description" content="Crea 30 días de contenido en 1 tarde usando IA. Demo en vivo. 31 de marzo." />
+  <meta property="og:title" content="Método Switch — Clase en Vivo Gratuita" />
+  <meta property="og:description" content="Crea 30 días de contenido en 1 tarde usando IA. Demo en vivo para alguien del público. 31 de marzo." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://entrenamiento.elraperomarketero.com" />
   <title>Método Switch — Clase en Vivo Gratuita</title>
+
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
 
   <style>
+    /* ═══════════════════════════════════════
+       TOKENS
+    ═══════════════════════════════════════ */
     :root {
-      --bg:      #05050a;
-      --s1:      #0d0d16;
-      --s2:      #13131f;
-      --red:     #e8405a;
-      --red-dim: rgba(232,64,90,0.15);
-      --red-xs:  rgba(232,64,90,0.06);
-      --cyan:    #06d6a0;
-      --text:    #ececf4;
-      --sub:     rgba(236,236,244,0.48);
-      --line:    rgba(255,255,255,0.06);
-      --linelo:  rgba(255,255,255,0.03);
-      --max:     660px;
-      --spring:  cubic-bezier(0.22, 1, 0.36, 1);
+      --bg:       #06060c;
+      --s1:       #0e0e18;
+      --s2:       #14141f;
+      --s3:       #1a1a26;
+      --red:      #e03a55;
+      --red-hi:   #ff5570;
+      --red-dim:  rgba(224,58,85,0.14);
+      --red-xs:   rgba(224,58,85,0.06);
+      --text:     #eeeef6;
+      --sub:      rgba(238,238,246,0.44);
+      --sub-lo:   rgba(238,238,246,0.22);
+      --line:     rgba(255,255,255,0.06);
+      --line-hi:  rgba(255,255,255,0.10);
+      --max:      660px;
+      --spring:   cubic-bezier(0.22, 1, 0.36, 1);
+      --snap:     cubic-bezier(0.16, 1, 0.3, 1);
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -39,101 +48,140 @@
       line-height: 1.6;
       overflow-x: hidden;
       -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
     }
 
-    /* ── GRAIN (fixed) ── */
+    /* ── FIXED LAYERS ── */
     #grain {
       position: fixed; inset: 0; z-index: 998;
-      pointer-events: none; opacity: 0.025;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      pointer-events: none; opacity: 0.028;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.72' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
     }
 
-    /* ── MESH BG ── */
     #mesh {
       position: fixed; inset: 0; z-index: 0; pointer-events: none;
       background:
-        radial-gradient(ellipse 80% 60% at 50% -10%, rgba(232,64,90,0.14) 0%, transparent 60%),
-        radial-gradient(ellipse 50% 40% at 90% 80%, rgba(6,214,160,0.055) 0%, transparent 55%),
-        radial-gradient(ellipse 40% 30% at 10% 70%, rgba(232,64,90,0.05) 0%, transparent 50%);
+        radial-gradient(ellipse 90% 55% at 50% -8%, rgba(224,58,85,0.16) 0%, transparent 62%),
+        radial-gradient(ellipse 40% 35% at 92% 85%, rgba(224,58,85,0.04) 0%, transparent 55%),
+        radial-gradient(ellipse 45% 30% at 8%  72%, rgba(224,58,85,0.04) 0%, transparent 50%);
     }
 
-    /* ── DOT GRID ── */
     #dotgrid {
       position: fixed; inset: 0; z-index: 0; pointer-events: none;
-      opacity: 0.18;
-      background-image: radial-gradient(circle, rgba(255,255,255,0.35) 1px, transparent 1px);
-      background-size: 32px 32px;
-      mask-image: radial-gradient(ellipse 80% 70% at 50% 20%, black 0%, transparent 80%);
-      -webkit-mask-image: radial-gradient(ellipse 80% 70% at 50% 20%, black 0%, transparent 80%);
+      opacity: 0.14;
+      background-image: radial-gradient(circle, rgba(255,255,255,0.3) 1px, transparent 1px);
+      background-size: 30px 30px;
+      mask-image: radial-gradient(ellipse 75% 65% at 50% 18%, black 0%, transparent 80%);
+      -webkit-mask-image: radial-gradient(ellipse 75% 65% at 50% 18%, black 0%, transparent 80%);
     }
 
     /* ── LAYOUT ── */
-    .w { max-width: var(--max); margin: 0 auto; padding: 0 clamp(18px,5vw,28px); position: relative; z-index: 1; }
+    .w { max-width: var(--max); margin: 0 auto; padding: 0 clamp(20px,5vw,30px); position: relative; z-index: 1; }
 
-    /* ── DIVIDER ── */
-    .div { height: 1px; background: linear-gradient(90deg, transparent, var(--line) 30%, var(--line) 70%, transparent); position: relative; z-index: 1; }
+    /* ── DIVIDERS ── */
+    .div {
+      height: 1px; position: relative; z-index: 1;
+      background: linear-gradient(90deg, transparent, var(--line) 25%, var(--line) 75%, transparent);
+    }
+    .glow-div {
+      height: 1px; position: relative; z-index: 1;
+      background: linear-gradient(90deg, transparent, var(--red) 35%, var(--red) 65%, transparent);
+      opacity: 0.2;
+    }
 
-    /* ── ANIMATIONS ── */
-    .up { opacity: 0; transform: translateY(32px); filter: blur(5px); transition: opacity .8s var(--spring), transform .8s var(--spring), filter .7s var(--spring); }
+    /* ── SCROLL ANIMATIONS ── */
+    .up {
+      opacity: 0;
+      transform: translateY(28px);
+      filter: blur(4px);
+      transition:
+        opacity  .75s var(--spring),
+        transform .75s var(--spring),
+        filter   .65s var(--spring);
+    }
     .up.on { opacity: 1; transform: none; filter: none; }
-    .d1 { transition-delay: .06s; } .d2 { transition-delay: .13s; }
-    .d3 { transition-delay: .20s; } .d4 { transition-delay: .27s; }
+    .d1 { transition-delay: .06s; }
+    .d2 { transition-delay: .13s; }
+    .d3 { transition-delay: .20s; }
+    .d4 { transition-delay: .27s; }
     .d5 { transition-delay: .34s; }
 
     /* ── EYEBROW ── */
     .eyebrow {
       display: inline-flex; align-items: center; gap: 7px;
-      font-size: .65rem; font-weight: 600; letter-spacing: .15em; text-transform: uppercase;
-      color: var(--sub); background: rgba(255,255,255,0.04);
+      font-size: .62rem; font-weight: 600; letter-spacing: .16em; text-transform: uppercase;
+      color: var(--sub); background: rgba(255,255,255,0.035);
       border: 1px solid var(--line); border-radius: 100px;
-      padding: 5px 14px; margin-bottom: 16px;
+      padding: 5px 14px; margin-bottom: 18px;
       box-shadow: inset 0 1px 0 rgba(255,255,255,0.06);
     }
 
+    /* ── SECTION HEADINGS ── */
     h2.st {
       font-family: 'Bricolage Grotesque', sans-serif;
-      font-size: clamp(1.45rem,4.5vw,2rem); font-weight: 800;
-      line-height: 1.15; color: #fff; letter-spacing: -.02em;
+      font-size: clamp(1.5rem, 4.8vw, 2.1rem);
+      font-weight: 800;
+      line-height: 1.13;
+      color: #fff;
+      letter-spacing: -.025em;
+      text-wrap: balance;
     }
 
-    /* ── BADGE ── */
+    /* ── LIVE BADGE ── */
     .badge {
-      display: inline-flex; align-items: center; gap: 8px;
-      background: var(--red-dim); border: 1px solid rgba(232,64,90,0.3);
-      color: var(--red); font-size: .65rem; font-weight: 700;
-      letter-spacing: .12em; text-transform: uppercase;
-      padding: 6px 16px; border-radius: 100px; margin-bottom: 28px;
-      box-shadow: 0 0 20px rgba(232,64,90,0.1), inset 0 1px 0 rgba(255,255,255,0.08);
+      display: inline-flex; align-items: center; gap: 9px;
+      background: var(--red-dim); border: 1px solid rgba(224,58,85,0.28);
+      color: var(--red-hi); font-size: .62rem; font-weight: 700;
+      letter-spacing: .13em; text-transform: uppercase;
+      padding: 6px 16px 6px 10px; border-radius: 100px; margin-bottom: 30px;
+      box-shadow: 0 0 24px rgba(224,58,85,0.1), inset 0 1px 0 rgba(255,255,255,0.07);
     }
-    .dot { width:7px; height:7px; background:var(--red); border-radius:50%; flex-shrink:0; animation: pulse 2s ease-in-out infinite; }
-    @keyframes pulse { 0%,100% { box-shadow: 0 0 0 0 rgba(232,64,90,.55); } 50% { box-shadow: 0 0 0 7px rgba(232,64,90,0); } }
+    .dot {
+      width: 7px; height: 7px; background: var(--red-hi); border-radius: 50%; flex-shrink: 0;
+      animation: pulse 2.2s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(224,58,85,.6); }
+      50%       { box-shadow: 0 0 0 7px rgba(224,58,85,0); }
+    }
 
-    /* ── HERO ── */
-    #hero { padding: clamp(80px,16vw,120px) 0 clamp(64px,12vw,88px); }
+    /* ════════════════════════════════════════
+       HERO
+    ════════════════════════════════════════ */
+    #hero { padding: clamp(88px,17vw,130px) 0 clamp(72px,13vw,96px); }
 
     #hero h1 {
       font-family: 'Bricolage Grotesque', sans-serif;
-      font-size: clamp(2rem,7vw,3.5rem); font-weight: 800;
-      line-height: 1.07; letter-spacing: -.03em; color: #fff;
-      margin-bottom: 20px; max-width: 580px;
+      font-size: clamp(2.1rem, 7.5vw, 3.75rem);
+      font-weight: 800;
+      line-height: 1.06;
+      letter-spacing: -.035em;
+      color: #fff;
+      margin-bottom: 22px;
+      max-width: 600px;
+      text-wrap: balance;
     }
     #hero h1 em {
       font-style: normal;
-      background: linear-gradient(110deg, var(--red) 0%, #ff7b93 50%, var(--red) 100%);
+      background: linear-gradient(115deg, var(--red-hi) 0%, #ff8fa0 45%, var(--red) 100%);
       background-size: 200% auto;
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
       background-clip: text;
-      animation: shimmer 4s linear infinite;
+      animation: shimmer 4.5s linear infinite;
     }
     @keyframes shimmer { to { background-position: 200% center; } }
 
     .sub {
-      font-size: clamp(.93rem,2.5vw,1.05rem); color: var(--sub);
-      max-width: 480px; margin: 0 0 32px; line-height: 1.75;
+      font-size: clamp(.93rem, 2.5vw, 1.05rem);
+      color: var(--sub);
+      max-width: 470px;
+      margin: 0 0 34px;
+      line-height: 1.78;
     }
 
     /* Date chips */
-    .hero-meta { display:flex; align-items:center; gap:10px; flex-wrap:wrap; margin-bottom:36px; }
+    .hero-meta { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 38px; }
     .date-chip {
       display: inline-flex; align-items: center; gap: 8px;
       background: rgba(255,255,255,0.04); border: 1px solid var(--line);
@@ -141,179 +189,296 @@
       font-size: .8rem; font-weight: 600; color: var(--text);
       box-shadow: inset 0 1px 0 rgba(255,255,255,0.06);
     }
-    .times { display:flex; align-items:center; gap:14px; flex-wrap:wrap; }
-    .tc { font-size:.78rem; font-weight:600; color:var(--sub); }
-    .tc b { color:var(--text); }
+    .times { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+    .tc { font-size: .78rem; font-weight: 500; color: var(--sub); }
+    .tc strong { color: var(--text); font-weight: 700; }
+
+    /* Flag labels */
+    .flag-label {
+      display: inline-flex; align-items: center; gap: 5px;
+      font-size: .72rem; font-weight: 600;
+      color: var(--sub-lo); letter-spacing: .04em;
+    }
 
     /* ── CTA BUTTON ── */
     .btn {
       display: inline-flex; align-items: center; justify-content: space-between;
       gap: 12px; background: var(--red); color: #fff;
       font-family: 'Plus Jakarta Sans', sans-serif;
-      font-size: clamp(.9rem,2.5vw,.98rem); font-weight: 700;
+      font-size: clamp(.9rem, 2.5vw, .97rem); font-weight: 700;
       text-decoration: none; padding: 6px 6px 6px 22px;
-      border-radius: 100px; width: 100%; max-width: 390px;
-      box-shadow: 0 0 0 1px rgba(232,64,90,.3), 0 0 48px rgba(232,64,90,.25), 0 8px 24px rgba(232,64,90,.15), inset 0 1px 0 rgba(255,255,255,.15);
-      transition: transform .5s var(--spring), box-shadow .5s var(--spring);
+      border-radius: 100px; width: 100%; max-width: 395px;
+      box-shadow:
+        0 0 0 1px rgba(224,58,85,.28),
+        0 0 52px rgba(224,58,85,.22),
+        0 8px 28px rgba(224,58,85,.14),
+        inset 0 1px 0 rgba(255,255,255,.14);
+      transition: transform .55s var(--spring), box-shadow .55s var(--spring);
       position: relative; overflow: hidden;
       -webkit-tap-highlight-color: transparent; touch-action: manipulation;
     }
     .btn::before {
-      content:''; position:absolute; inset:0;
-      background: linear-gradient(110deg, rgba(255,255,255,.12) 0%, transparent 60%);
-      pointer-events:none;
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(115deg, rgba(255,255,255,.13) 0%, transparent 55%);
+      pointer-events: none;
     }
-    .btn-label { display:flex; align-items:center; gap:10px; flex:1; }
+    .btn-label { display: flex; align-items: center; gap: 10px; flex: 1; }
     .btn-arrow {
-      width:44px; height:44px; border-radius:50%;
-      background:rgba(0,0,0,.22); display:flex; align-items:center; justify-content:center;
-      flex-shrink:0; box-shadow:inset 0 1px 0 rgba(255,255,255,.1);
-      transition: transform .5s var(--spring), background .3s ease;
+      width: 44px; height: 44px; border-radius: 50%;
+      background: rgba(0,0,0,.22); display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; box-shadow: inset 0 1px 0 rgba(255,255,255,.1);
+      transition: transform .55s var(--spring), background .3s ease;
     }
     @media (hover:hover) {
-      .btn:hover { transform:translateY(-3px); box-shadow:0 0 0 1px rgba(232,64,90,.4), 0 0 64px rgba(232,64,90,.4), 0 12px 32px rgba(232,64,90,.2), inset 0 1px 0 rgba(255,255,255,.15); }
-      .btn:hover .btn-arrow { transform:translate(2px,-1px) scale(1.1); background:rgba(0,0,0,.32); }
+      .btn:hover {
+        transform: translateY(-3px);
+        box-shadow:
+          0 0 0 1px rgba(224,58,85,.38),
+          0 0 68px rgba(224,58,85,.38),
+          0 14px 36px rgba(224,58,85,.18),
+          inset 0 1px 0 rgba(255,255,255,.14);
+      }
+      .btn:hover .btn-arrow { transform: translate(2px,-2px) scale(1.1); background: rgba(0,0,0,.3); }
     }
-    .btn:active { transform:scale(.98); }
+    .btn:active { transform: scale(.975); }
 
-    .btn-sub { margin-top:13px; font-size:.75rem; color:var(--sub); }
-    .btn-sub b { color:var(--cyan); font-weight:600; }
+    .btn-sub { margin-top: 14px; font-size: .74rem; color: var(--sub); }
+    .btn-sub strong { color: rgba(238,238,246,.75); font-weight: 600; }
 
     /* ── SECTIONS ── */
-    section { padding: clamp(56px,12vw,80px) 0; }
+    section { padding: clamp(64px,13vw,92px) 0; }
 
-    /* ── GLOW LINE DIVIDER ── */
-    .glow-div {
-      height:1px; position:relative; z-index:1;
-      background: linear-gradient(90deg, transparent, var(--red) 40%, var(--red) 60%, transparent);
-      opacity: .18;
-    }
+    /* ════════════════════════════════════════
+       FEATURE CARDS
+    ════════════════════════════════════════ */
+    .grid { display: grid; grid-template-columns: 1fr; gap: 10px; margin-top: 32px; }
+    @media (min-width: 520px) { .grid { grid-template-columns: 1fr 1fr; } }
 
-    /* ── FEATURE CARDS ── */
-    .grid { display:grid; grid-template-columns:1fr; gap:12px; margin-top:28px; }
-    @media (min-width:520px) { .grid { grid-template-columns:1fr 1fr; } }
-
+    /* Double-bezel outer shell */
     .card-wrap {
-      background: linear-gradient(135deg, rgba(255,255,255,.035) 0%, rgba(255,255,255,.01) 100%);
-      border: 1px solid var(--line); border-radius: 18px; padding: 5px;
+      background: linear-gradient(145deg, rgba(255,255,255,.04) 0%, rgba(255,255,255,.01) 100%);
+      border: 1px solid var(--line); border-radius: 20px; padding: 4px;
       box-shadow: inset 0 1px 0 rgba(255,255,255,.06);
       transition: border-color .4s var(--spring), transform .4s var(--spring), box-shadow .4s var(--spring);
       position: relative; overflow: hidden;
+      --mx: -100px; --my: -100px;
     }
-    /* Left accent glow line */
+    /* Spotlight border layer */
+    .card-wrap::after {
+      content: ''; position: absolute; inset: 0; border-radius: inherit;
+      background: radial-gradient(280px circle at var(--mx) var(--my), rgba(224,58,85,.1), transparent 65%);
+      opacity: 0; transition: opacity .35s ease; pointer-events: none; z-index: 0;
+    }
+    /* Left accent glow */
     .card-wrap::before {
-      content:''; position:absolute; left:0; top:15%; bottom:15%; width:2px;
+      content: ''; position: absolute; left: 0; top: 12%; bottom: 12%; width: 2px;
       background: linear-gradient(180deg, transparent, var(--red), transparent);
-      opacity: 0; border-radius:2px;
+      opacity: 0; border-radius: 2px;
       transition: opacity .4s var(--spring);
+      z-index: 1;
     }
     @media (hover:hover) {
-      .card-wrap:hover { border-color:rgba(232,64,90,.18); transform:translateY(-3px); box-shadow: 0 12px 40px rgba(232,64,90,.08), inset 0 1px 0 rgba(255,255,255,.08); }
-      .card-wrap:hover::before { opacity:1; }
+      .card-wrap:hover { border-color: rgba(224,58,85,.2); transform: translateY(-4px); box-shadow: 0 14px 44px rgba(224,58,85,.09), inset 0 1px 0 rgba(255,255,255,.08); }
+      .card-wrap:hover::before { opacity: 1; }
+      .card-wrap:hover::after  { opacity: 1; }
     }
-    @media (min-width:520px) {
-      .card-wrap:nth-child(2) { transform:rotate(.4deg); }
-      .card-wrap:nth-child(3) { transform:rotate(-.3deg); }
-      .card-wrap:nth-child(4) { transform:rotate(.5deg); }
-      .card-wrap:nth-child(2):hover,.card-wrap:nth-child(3):hover,.card-wrap:nth-child(4):hover { transform:rotate(0) translateY(-3px); }
+    @media (min-width: 520px) {
+      .card-wrap:nth-child(2) { transform: rotate(.4deg); }
+      .card-wrap:nth-child(3) { transform: rotate(-.35deg); }
+      .card-wrap:nth-child(4) { transform: rotate(.45deg); }
+      .card-wrap:nth-child(2):hover,
+      .card-wrap:nth-child(3):hover,
+      .card-wrap:nth-child(4):hover { transform: rotate(0) translateY(-4px); }
     }
+
+    /* Double-bezel inner core */
     .card-in {
-      background: var(--s1); border-radius:13px; padding:clamp(16px,4vw,22px);
-      display:flex; gap:14px; align-items:flex-start;
+      background: var(--s1); border-radius: 16px;
+      padding: clamp(18px,4.5vw,24px);
+      display: flex; gap: 16px; align-items: flex-start;
       box-shadow: inset 0 1px 0 rgba(255,255,255,.05);
+      position: relative; z-index: 1;
     }
-    .ci { font-size:1.35rem; flex-shrink:0; margin-top:2px; line-height:1; }
+    .ci {
+      flex-shrink: 0; margin-top: 1px; line-height: 1;
+      width: 36px; height: 36px;
+      background: var(--red-dim); border: 1px solid rgba(224,58,85,.18); border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--red-hi);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.07);
+    }
     .cb h3 {
-      font-family:'Bricolage Grotesque',sans-serif; font-size:clamp(.88rem,2.5vw,.97rem);
-      font-weight:700; color:#fff; margin-bottom:6px; line-height:1.3; letter-spacing:-.01em;
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: clamp(.88rem, 2.5vw, .97rem);
+      font-weight: 700; color: #fff; margin-bottom: 7px;
+      line-height: 1.3; letter-spacing: -.015em;
     }
-    .cb p { font-size:clamp(.81rem,2vw,.87rem); color:var(--sub); line-height:1.6; }
+    .cb p { font-size: clamp(.8rem, 2vw, .86rem); color: var(--sub); line-height: 1.65; }
 
-    /* ── CHECKLIST ── */
-    .checks { list-style:none; margin-top:24px; display:flex; flex-direction:column; gap:14px; }
-    .checks li { display:flex; align-items:flex-start; gap:14px; font-size:clamp(.9rem,2.4vw,.97rem); color:var(--text); line-height:1.6; }
+    /* ════════════════════════════════════════
+       CHECKLIST
+    ════════════════════════════════════════ */
+    .checks { list-style: none; margin-top: 26px; display: flex; flex-direction: column; gap: 14px; }
+    .checks li {
+      display: flex; align-items: flex-start; gap: 14px;
+      font-size: clamp(.9rem, 2.4vw, .97rem); color: var(--text); line-height: 1.65;
+    }
     .ck {
-      flex-shrink:0; width:24px; height:24px; border-radius:50%;
-      background:rgba(6,214,160,.07); border:1px solid rgba(6,214,160,.22);
-      display:flex; align-items:center; justify-content:center; margin-top:2px;
-      box-shadow: 0 0 12px rgba(6,214,160,.1), inset 0 1px 0 rgba(6,214,160,.1);
+      flex-shrink: 0; width: 24px; height: 24px; border-radius: 50%;
+      background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.14);
+      display: flex; align-items: center; justify-content: center; margin-top: 2px;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.07);
     }
 
-    /* ── SPEAKER ── */
+    /* ════════════════════════════════════════
+       SPEAKER
+    ════════════════════════════════════════ */
     .spk-wrap {
-      background: linear-gradient(135deg, rgba(255,255,255,.03), rgba(255,255,255,.01));
-      border:1px solid var(--line); border-radius:22px; padding:5px; margin-top:24px;
+      background: linear-gradient(145deg, rgba(255,255,255,.035), rgba(255,255,255,.01));
+      border: 1px solid var(--line); border-radius: 24px; padding: 4px; margin-top: 26px;
       box-shadow: inset 0 1px 0 rgba(255,255,255,.06);
     }
     .spk-in {
-      background:var(--s1); border-radius:18px; padding:clamp(22px,5vw,30px);
-      display:flex; gap:22px; align-items:flex-start;
+      background: var(--s1); border-radius: 20px;
+      padding: clamp(24px,5.5vw,34px);
+      display: flex; gap: 24px; align-items: flex-start;
       box-shadow: inset 0 1px 0 rgba(255,255,255,.05);
+      position: relative; overflow: hidden;
     }
-    @media (max-width:420px) { .spk-in { flex-direction:column; align-items:center; text-align:center; } }
+    /* Ambient glow inside speaker card */
+    .spk-in::before {
+      content: ''; position: absolute; right: -60px; bottom: -60px;
+      width: 200px; height: 200px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(224,58,85,.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    @media (max-width: 440px) { .spk-in { flex-direction: column; align-items: center; text-align: center; } }
 
-    .av-wrap {
-      width:74px; height:74px; min-width:74px; border-radius:50%;
-      background:rgba(232,64,90,.12); border:1px solid rgba(232,64,90,.22);
-      padding:4px; box-shadow:0 0 32px rgba(232,64,90,.22); flex-shrink:0;
+    .av-outer {
+      width: 76px; height: 76px; min-width: 76px;
+      border-radius: 50%; flex-shrink: 0;
+      padding: 3px;
+      background: linear-gradient(135deg, rgba(224,58,85,.6) 0%, rgba(224,58,85,.15) 100%);
+      box-shadow: 0 0 28px rgba(224,58,85,.22);
     }
     .av-in {
-      width:100%; height:100%; border-radius:50%;
-      background:linear-gradient(135deg,var(--red) 0%,#3a6fff 100%);
-      display:flex; align-items:center; justify-content:center;
-      font-family:'Bricolage Grotesque',sans-serif; font-size:1.2rem; font-weight:800; color:#fff;
-      box-shadow:inset 0 1px 0 rgba(255,255,255,.2);
-      overflow:hidden;
+      width: 100%; height: 100%; border-radius: 50%;
+      background: linear-gradient(135deg, var(--s2) 0%, var(--s3) 100%);
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: 1.15rem; font-weight: 800; color: #fff;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.15);
+      overflow: hidden; border: 1px solid rgba(224,58,85,.15);
     }
-    .av-in img { width:100%; height:100%; object-fit:cover; border-radius:50%; }
-    .si h3 { font-family:'Bricolage Grotesque',sans-serif; font-size:clamp(1rem,3vw,1.12rem); font-weight:800; color:#fff; margin-bottom:3px; letter-spacing:-.02em; }
-    .si .role { font-size:.68rem; color:var(--red); font-weight:700; letter-spacing:.1em; text-transform:uppercase; margin-bottom:10px; }
-    .si .bio { font-size:clamp(.85rem,2.2vw,.9rem); color:var(--sub); line-height:1.7; }
+    .av-in img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; }
 
-    /* ── URGENCY ── */
+    .si { position: relative; z-index: 1; }
+    .si h3 {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: clamp(1rem,3vw,1.14rem); font-weight: 800; color: #fff;
+      margin-bottom: 3px; letter-spacing: -.025em;
+    }
+    .si .role {
+      font-size: .66rem; color: var(--red-hi); font-weight: 700;
+      letter-spacing: .1em; text-transform: uppercase; margin-bottom: 11px;
+    }
+    .si .bio { font-size: clamp(.84rem,2.2vw,.9rem); color: var(--sub); line-height: 1.72; }
+
+    /* Stats row in speaker */
+    .si-stats {
+      display: flex; gap: 20px; flex-wrap: wrap; margin-top: 14px;
+    }
+    .si-stat { display: flex; flex-direction: column; gap: 2px; }
+    .si-stat strong {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: .92rem; font-weight: 800; color: #fff; letter-spacing: -.01em;
+    }
+    .si-stat span { font-size: .68rem; color: var(--sub); font-weight: 500; letter-spacing: .04em; text-transform: uppercase; }
+
+    /* ════════════════════════════════════════
+       URGENCY
+    ════════════════════════════════════════ */
     .urg-wrap {
-      background: linear-gradient(135deg, rgba(232,64,90,.07), rgba(232,64,90,.02));
-      border:1px solid rgba(232,64,90,.16); border-radius:18px; padding:5px;
-      box-shadow: 0 0 40px rgba(232,64,90,.06), inset 0 1px 0 rgba(232,64,90,.08);
+      background: linear-gradient(145deg, rgba(224,58,85,.08), rgba(224,58,85,.025));
+      border: 1px solid rgba(224,58,85,.17); border-radius: 20px; padding: 4px;
+      box-shadow: 0 0 44px rgba(224,58,85,.06), inset 0 1px 0 rgba(224,58,85,.09);
     }
     .urg-in {
-      background:rgba(232,64,90,.04); border-radius:13px;
-      padding:clamp(18px,4vw,26px); display:flex; gap:14px; align-items:flex-start;
+      background: rgba(224,58,85,.04); border-radius: 16px;
+      padding: clamp(20px,4.5vw,28px);
+      display: flex; gap: 16px; align-items: flex-start;
     }
-    .ui { font-size:1.3rem; flex-shrink:0; margin-top:1px; line-height:1; }
-    .ut { font-size:clamp(.9rem,2.4vw,.97rem); color:var(--text); line-height:1.7; }
+    .ui {
+      flex-shrink: 0; margin-top: 1px; line-height: 1; color: var(--red-hi);
+      width: 36px; height: 36px;
+      background: rgba(224,58,85,.12); border: 1px solid rgba(224,58,85,.2); border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .ut { font-size: clamp(.9rem,2.4vw,.97rem); color: var(--text); line-height: 1.72; }
 
-    /* ── CTA FINAL ── */
-    #cta { padding: clamp(64px,12vw,88px) 0; }
+    /* ════════════════════════════════════════
+       CTA FINAL
+    ════════════════════════════════════════ */
+    #cta { padding: clamp(72px,13vw,100px) 0; }
     #cta .hl {
-      font-family:'Bricolage Grotesque',sans-serif;
-      font-size:clamp(1.35rem,5.5vw,2.1rem); font-weight:800; color:#fff;
-      margin-bottom:10px; line-height:1.15; letter-spacing:-.025em;
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: clamp(1.4rem,5.8vw,2.2rem); font-weight: 800; color: #fff;
+      margin-bottom: 11px; line-height: 1.13; letter-spacing: -.03em;
+      text-wrap: balance;
     }
-    #cta .sl { font-size:clamp(.8rem,2vw,.88rem); color:var(--sub); margin-bottom:32px; letter-spacing:.04em; font-weight:500; }
+    #cta .sl {
+      font-size: clamp(.8rem,2vw,.88rem); color: var(--sub);
+      margin-bottom: 34px; letter-spacing: .04em; font-weight: 500;
+    }
 
-    /* ── FOOTER ── */
-    footer { padding:clamp(36px,8vw,52px) 0 clamp(44px,10vw,60px); text-align:center; position:relative; z-index:1; }
-    .f-replay { font-size:clamp(.8rem,2vw,.86rem); color:var(--sub); margin-bottom:12px; line-height:1.7; max-width:400px; margin-left:auto; margin-right:auto; }
-    .f-replay .ac { color:var(--red); font-weight:600; }
-    .f-copy { font-size:.7rem; color:rgba(236,236,244,.2); letter-spacing:.06em; font-weight:500; }
+    /* ════════════════════════════════════════
+       FOOTER
+    ════════════════════════════════════════ */
+    footer {
+      padding: clamp(40px,9vw,56px) 0 clamp(48px,11vw,68px);
+      text-align: center; position: relative; z-index: 1;
+    }
+    .f-replay {
+      font-size: clamp(.8rem,2vw,.86rem); color: var(--sub);
+      margin-bottom: 14px; line-height: 1.75;
+      max-width: 380px; margin-left: auto; margin-right: auto;
+    }
+    .f-replay .ac { color: var(--red-hi); font-weight: 600; }
+    .f-copy { font-size: .68rem; color: rgba(238,238,246,.18); letter-spacing: .07em; font-weight: 500; }
 
-    /* WA SVG */
-    .wa-svg { flex-shrink:0; }
+    /* ── WA SVG ── */
+    .wa-svg { flex-shrink: 0; }
+
+    /* ── FOCUS ring ── */
+    a:focus-visible, button:focus-visible {
+      outline: 2px solid var(--red-hi); outline-offset: 3px; border-radius: 4px;
+    }
+
+    /* ── Skip link ── */
+    .skip {
+      position: absolute; top: -100%; left: 16px; z-index: 9999;
+      background: var(--red); color: #fff; padding: 8px 16px;
+      border-radius: 8px; font-weight: 700; font-size: .85rem;
+      transition: top .2s ease; text-decoration: none;
+    }
+    .skip:focus { top: 16px; }
   </style>
 </head>
 <body>
 
+<a href="#main-content" class="skip">Saltar al contenido principal</a>
+
 <div id="grain" aria-hidden="true"></div>
-<div id="mesh" aria-hidden="true"></div>
+<div id="mesh"  aria-hidden="true"></div>
 <div id="dotgrid" aria-hidden="true"></div>
 
 <!-- ══════ HERO ══════ -->
+<main id="main-content">
 <section id="hero">
   <div class="w">
 
-    <div class="badge up">
-      <span class="dot"></span>
+    <div class="badge up" aria-label="Clase en vivo gratuita">
+      <span class="dot" aria-hidden="true"></span>
       Clase en vivo gratuita
     </div>
 
@@ -322,20 +487,29 @@
     </h1>
 
     <p class="sub up d2">
-      Clase en vivo donde te demuestro en tiempo real cómo crear 30 días de contenido en una sola tarde usando IA — con una demo en vivo para alguien del público.
+      Clase en vivo donde demuestro en tiempo real cómo crear 30 días de contenido en una sola tarde usando IA — con una demo en vivo para alguien del público.
     </p>
 
     <div class="hero-meta up d3">
-      <span class="date-chip">📅 Martes 31 de marzo, 2026</span>
+      <span class="date-chip">
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+          <rect x="1.5" y="2.5" width="13" height="12" rx="2.5" stroke="currentColor" stroke-width="1.4"/>
+          <path d="M1.5 6.5h13" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+          <path d="M5 1.5v2M11 1.5v2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+        </svg>
+        Martes 31 de marzo, 2026
+      </span>
       <div class="times">
-        <span class="tc">🇻🇪 <b>8PM</b></span>
-        <span class="tc">🇨🇴 <b>7PM</b></span>
-        <span class="tc">🇦🇷 <b>9PM</b></span>
+        <span class="tc">VEN <strong>8 PM</strong></span>
+        <span class="tc" aria-hidden="true" style="color:var(--line)">·</span>
+        <span class="tc">COL <strong>7 PM</strong></span>
+        <span class="tc" aria-hidden="true" style="color:var(--line)">·</span>
+        <span class="tc">ARG <strong>9 PM</strong></span>
       </div>
     </div>
 
     <div class="up d4">
-      <a href="https://chat.whatsapp.com/LKlt7m2hPDYL85AOeHkSjM?mode=hq2tcli" target="_blank" rel="noopener noreferrer" class="btn">
+      <a href="https://chat.whatsapp.com/LKlt7m2hPDYL85AOeHkSjM?mode=hq2tcli" target="_blank" rel="noopener noreferrer" class="btn" aria-label="Únete al grupo de WhatsApp para recibir el link de la clase">
         <span class="btn-label">
           <svg class="wa-svg" width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
             <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z" fill="currentColor"/>
@@ -348,28 +522,96 @@
           </svg>
         </span>
       </a>
-      <p class="btn-sub up d5"><b>Gratis</b> · Sin compromiso · Recibirás el link de la clase en el grupo</p>
+      <p class="btn-sub up d5"><strong>Gratis</strong> · Sin compromiso · Recibirás el link de la clase en el grupo</p>
     </div>
 
   </div>
 </section>
+</main>
 
 <div class="glow-div"></div>
 
 <!-- ══════ QUÉ VAS A VER ══════ -->
-<section>
+<section aria-labelledby="seccion-que-vas-a-ver">
   <div class="w">
     <span class="eyebrow up">
-      <svg width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true"><circle cx="5" cy="5" r="4" stroke="currentColor" stroke-width="1.2"/><path d="M5 3v2.5L6.5 7" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+      <svg width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true">
+        <circle cx="5" cy="5" r="4" stroke="currentColor" stroke-width="1.2"/>
+        <path d="M5 3v2.5L6.5 7" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+      </svg>
       Qué vas a ver en esta clase
     </span>
-    <h2 class="st up d1">60 minutos que van a cambiar<br>cómo creas contenido</h2>
+    <h2 id="seccion-que-vas-a-ver" class="st up d1">60 minutos que van a cambiar<br>cómo creas contenido</h2>
 
     <div class="grid">
-      <div class="card-wrap up d1"><div class="card-in"><div class="ci">📅</div><div class="cb"><h3>30 días de contenido en 1 tarde</h3><p>Cómo tener tu mes completo planificado sin improvisar ni depender de la inspiración.</p></div></div></div>
-      <div class="card-wrap up d2"><div class="card-in"><div class="ci">🔴</div><div class="cb"><h3>Demo en vivo para alguien del público</h3><p>Voy a crear el contenido del mes para un asistente en tiempo real. Puede ser para TU negocio.</p></div></div></div>
-      <div class="card-wrap up d3"><div class="card-in"><div class="ci">🧠</div><div class="cb"><h3>Por qué no eres inconstante</h3><p>La verdadera razón por la que no publicas todos los días — y el sistema que lo resuelve.</p></div></div></div>
-      <div class="card-wrap up d4"><div class="card-in"><div class="ci">🎙️</div><div class="cb"><h3>Que la IA escriba con TU voz</h3><p>Tu contenido va a sonar a ti, no a robot genérico. Te muestro cómo.</p></div></div></div>
+      <!-- Card 1 -->
+      <div class="card-wrap up d1">
+        <div class="card-in">
+          <div class="ci" aria-hidden="true">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+              <rect x="1.5" y="2.5" width="15" height="13" rx="2.5" stroke="currentColor" stroke-width="1.4"/>
+              <path d="M1.5 7h15" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+              <path d="M5.5 1.5v2M12.5 1.5v2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+              <path d="M5 11h8M5 13.5h5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" opacity=".6"/>
+            </svg>
+          </div>
+          <div class="cb">
+            <h3>30 días de contenido en 1 tarde</h3>
+            <p>Cómo tener tu mes completo planificado sin improvisar ni depender de la inspiración.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="card-wrap up d2">
+        <div class="card-in">
+          <div class="ci" aria-hidden="true">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+              <circle cx="9" cy="9" r="7" stroke="currentColor" stroke-width="1.4"/>
+              <circle cx="9" cy="9" r="3" fill="currentColor" opacity=".4"/>
+              <circle cx="9" cy="9" r="1.5" fill="currentColor"/>
+            </svg>
+          </div>
+          <div class="cb">
+            <h3>Demo en vivo para alguien del público</h3>
+            <p>Voy a crear el contenido del mes para un asistente en tiempo real. Puede ser para tu negocio.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="card-wrap up d3">
+        <div class="card-in">
+          <div class="ci" aria-hidden="true">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+              <path d="M9 2C5.13 2 2 5.13 2 9s3.13 7 7 7 7-3.13 7-7-3.13-7-7-7z" stroke="currentColor" stroke-width="1.4"/>
+              <path d="M6 9h6M9 6v6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" opacity=".6"/>
+              <path d="M9 4.5V2M9 16v-2.5M4.5 9H2M16 9h-2.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" opacity=".35"/>
+            </svg>
+          </div>
+          <div class="cb">
+            <h3>Por qué no eres inconstante</h3>
+            <p>La verdadera razón por la que no publicas todos los días — y el sistema que lo resuelve.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 4 -->
+      <div class="card-wrap up d4">
+        <div class="card-in">
+          <div class="ci" aria-hidden="true">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+              <rect x="7" y="2" width="4" height="9" rx="2" stroke="currentColor" stroke-width="1.4"/>
+              <path d="M4 9.5a5 5 0 0010 0" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+              <path d="M9 14.5v2M6.5 16.5h5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <div class="cb">
+            <h3>Que la IA escriba con tu voz</h3>
+            <p>Tu contenido va a sonar a ti, no a robot genérico. Te muestro exactamente cómo.</p>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -377,18 +619,48 @@
 <div class="div"></div>
 
 <!-- ══════ PARA QUIÉN ══════ -->
-<section>
+<section aria-labelledby="seccion-para-quien">
   <div class="w">
     <span class="eyebrow up">
-      <svg width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true"><path d="M5 1a2 2 0 100 4 2 2 0 000-4zM1 9c0-2.21 1.79-4 4-4s4 1.79 4 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+      <svg width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true">
+        <path d="M5 1a2 2 0 100 4 2 2 0 000-4zM1 9c0-2.21 1.79-4 4-4s4 1.79 4 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+      </svg>
       ¿Esto es para ti?
     </span>
-    <h2 class="st up d1">Esta clase es para ti si...</h2>
+    <h2 id="seccion-para-quien" class="st up d1">Esta clase es para ti si...</h2>
     <ul class="checks" role="list">
-      <li class="up d1"><span class="ck" aria-hidden="true"><svg width="10" height="8" viewBox="0 0 10 8" fill="none"><path d="M1 3.5L3.8 6.5L9 1" stroke="#06d6a0" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Creas contenido pero te toma demasiado tiempo y no eres constante.</li>
-      <li class="up d2"><span class="ck" aria-hidden="true"><svg width="10" height="8" viewBox="0 0 10 8" fill="none"><path d="M1 3.5L3.8 6.5L9 1" stroke="#06d6a0" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Ya usaste ChatGPT pero sientes que no lo aprovechas o te da respuestas genéricas.</li>
-      <li class="up d3"><span class="ck" aria-hidden="true"><svg width="10" height="8" viewBox="0 0 10 8" fill="none"><path d="M1 3.5L3.8 6.5L9 1" stroke="#06d6a0" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Quieres que la IA trabaje para ti pero no sabes por dónde empezar sin marearte con 100 herramientas.</li>
-      <li class="up d4"><span class="ck" aria-hidden="true"><svg width="10" height="8" viewBox="0 0 10 8" fill="none"><path d="M1 3.5L3.8 6.5L9 1" stroke="#06d6a0" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Estás cansado/a de trabajar todo el día y sentir que no avanzas.</li>
+      <li class="up d1">
+        <span class="ck" aria-hidden="true">
+          <svg width="10" height="8" viewBox="0 0 10 8" fill="none">
+            <path d="M1 3.5L3.8 6.5L9 1" stroke="rgba(238,238,246,0.7)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </span>
+        Creas contenido pero te toma demasiado tiempo y no eres constante.
+      </li>
+      <li class="up d2">
+        <span class="ck" aria-hidden="true">
+          <svg width="10" height="8" viewBox="0 0 10 8" fill="none">
+            <path d="M1 3.5L3.8 6.5L9 1" stroke="rgba(238,238,246,0.7)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </span>
+        Ya usaste ChatGPT pero sientes que no lo aprovechas o te da respuestas genéricas.
+      </li>
+      <li class="up d3">
+        <span class="ck" aria-hidden="true">
+          <svg width="10" height="8" viewBox="0 0 10 8" fill="none">
+            <path d="M1 3.5L3.8 6.5L9 1" stroke="rgba(238,238,246,0.7)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </span>
+        Quieres que la IA trabaje para ti pero no sabes por dónde empezar sin marearte con 100 herramientas.
+      </li>
+      <li class="up d4">
+        <span class="ck" aria-hidden="true">
+          <svg width="10" height="8" viewBox="0 0 10 8" fill="none">
+            <path d="M1 3.5L3.8 6.5L9 1" stroke="rgba(238,238,246,0.7)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </span>
+        Estás cansado de trabajar todo el día y sentir que no avanzas.
+      </li>
     </ul>
   </div>
 </section>
@@ -396,21 +668,37 @@
 <div class="div"></div>
 
 <!-- ══════ SPEAKER ══════ -->
-<section>
+<section aria-labelledby="seccion-speaker">
   <div class="w">
     <span class="eyebrow up">
-      <svg width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true"><path d="M5 1a2 2 0 100 4 2 2 0 000-4zM1.5 9.5c0-1.93 1.57-3.5 3.5-3.5s3.5 1.57 3.5 3.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
-      Tu host
+      <svg width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true">
+        <path d="M5 1a2 2 0 100 4 2 2 0 000-4zM1.5 9.5c0-1.93 1.57-3.5 3.5-3.5s3.5 1.57 3.5 3.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+      </svg>
+      Tu instructor
     </span>
     <div class="spk-wrap up d1">
       <div class="spk-in">
-        <div class="av-wrap">
+        <div class="av-outer" aria-hidden="true">
           <div class="av-in" id="avatar">RM</div>
         </div>
         <div class="si">
-          <h3>El Rapero Marketero</h3>
+          <h3 id="seccion-speaker">El Rapero Marketero</h3>
           <div class="role">Creador del Método Switch</div>
-          <p class="bio">Joven venezolano que a sus 27 años ha ayudado con su agencia a automatizar más de 100 empresas en todo LATAM. Ha capacitado a más de 20,000 personas con sus conferencias en 5 países.</p>
+          <p class="bio">Joven venezolano que a sus 27 años ha ayudado con su agencia a automatizar más de 100 empresas en todo LATAM. Ha capacitado a más de 20.000 personas con sus conferencias en 5 países.</p>
+          <div class="si-stats">
+            <div class="si-stat">
+              <strong>+100</strong>
+              <span>empresas automatizadas</span>
+            </div>
+            <div class="si-stat">
+              <strong>20 K</strong>
+              <span>personas capacitadas</span>
+            </div>
+            <div class="si-stat">
+              <strong>5</strong>
+              <span>países</span>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -420,11 +708,15 @@
 <div class="glow-div"></div>
 
 <!-- ══════ URGENCIA ══════ -->
-<section style="padding-top:clamp(36px,8vw,48px);padding-bottom:clamp(36px,8vw,48px);">
+<section style="padding-top:clamp(40px,9vw,54px);padding-bottom:clamp(40px,9vw,54px);">
   <div class="w">
     <div class="urg-wrap up">
       <div class="urg-in">
-        <div class="ui">⚡</div>
+        <div class="ui" aria-hidden="true">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+            <path d="M9 2L10.8 7H16L11.6 10.2L13.4 15.2L9 12L4.6 15.2L6.4 10.2L2 7H7.2L9 2Z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/>
+          </svg>
+        </div>
         <p class="ut"><strong style="color:#fff;font-weight:700;">Cupos limitados.</strong> Voy a hacer una demo en vivo personalizada para alguien del público. Para poder dar atención real, los lugares son limitados.</p>
       </div>
     </div>
@@ -434,12 +726,12 @@
 <div class="div"></div>
 
 <!-- ══════ CTA FINAL ══════ -->
-<section id="cta">
+<section id="cta" aria-labelledby="cta-titulo">
   <div class="w">
-    <h2 class="hl up">¿Cuántas horas más vas a perder haciendo contenido en modo manual?</h2>
-    <p class="sl up d1">31 de marzo · 8PM VEN · 7PM COL · 9PM ARG</p>
+    <h2 id="cta-titulo" class="hl up">¿Cuántas horas más vas a perder haciendo contenido en modo manual?</h2>
+    <p class="sl up d1">31 de marzo · 8 PM VEN · 7 PM COL · 9 PM ARG</p>
     <div class="up d2">
-      <a href="https://chat.whatsapp.com/LKlt7m2hPDYL85AOeHkSjM?mode=hq2tcli" target="_blank" rel="noopener noreferrer" class="btn">
+      <a href="https://chat.whatsapp.com/LKlt7m2hPDYL85AOeHkSjM?mode=hq2tcli" target="_blank" rel="noopener noreferrer" class="btn" aria-label="Únete al grupo de WhatsApp para recibir el link de la clase">
         <span class="btn-label">
           <svg class="wa-svg" width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
             <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z" fill="currentColor"/>
@@ -452,7 +744,7 @@
           </svg>
         </span>
       </a>
-      <p class="btn-sub up d3"><b>Gratis</b> · Recibirás el link de la clase en el grupo</p>
+      <p class="btn-sub up d3"><strong>Gratis</strong> · Recibirás el link de la clase en el grupo</p>
     </div>
   </div>
 </section>
@@ -468,15 +760,27 @@
 </footer>
 
 <script>
-  const io = new IntersectionObserver(es => {
-    es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('on'); io.unobserve(e.target); } });
-  }, { threshold: 0.08, rootMargin: '0px 0px -28px 0px' });
+  /* ── Scroll reveal ── */
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('on'); io.unobserve(e.target); }
+    });
+  }, { threshold: 0.07, rootMargin: '0px 0px -24px 0px' });
 
   document.querySelectorAll('.up').forEach(el => io.observe(el));
 
   document.addEventListener('DOMContentLoaded', () => {
     requestAnimationFrame(() => {
       document.querySelectorAll('#hero .up, footer .up').forEach(el => el.classList.add('on'));
+    });
+  });
+
+  /* ── Spotlight border on cards ── */
+  document.querySelectorAll('.card-wrap').forEach(card => {
+    card.addEventListener('mousemove', e => {
+      const r = card.getBoundingClientRect();
+      card.style.setProperty('--mx', `${e.clientX - r.left}px`);
+      card.style.setProperty('--my', `${e.clientY - r.top}px`);
     });
   });
 </script>
