@@ -531,6 +531,36 @@
     .f-note .ac { color: var(--red-hi); font-weight: 600; }
     .f-copy { font-size: .67rem; color: rgba(239,240,248,.16); letter-spacing: .07em; font-weight: 500; }
 
+    /* ═══════ HERO VIDEO ═══════ */
+    .hero-video-wrap {
+      margin: 0 auto 36px;
+      max-width: 500px;
+      width: 100%;
+      position: relative; z-index: 1;
+    }
+    .hero-video-outer {
+      position: relative;
+      border-radius: 20px;
+      padding: 3px;
+      background: linear-gradient(145deg, rgba(255,255,255,.06), rgba(255,255,255,.01));
+      border: 1px solid rgba(255,255,255,.09);
+      box-shadow:
+        0 0 0 1px rgba(224,30,56,.12),
+        0 0 40px rgba(224,30,56,.1),
+        0 20px 60px rgba(0,0,0,.5);
+    }
+    .hero-video-outer .hud-tl,
+    .hero-video-outer .hud-br {
+      width: 14px; height: 14px; opacity: .55;
+    }
+    .hero-video {
+      display: block;
+      width: 100%;
+      border-radius: 17px;
+      object-fit: cover;
+      aspect-ratio: 16/9;
+    }
+
     /* ── Accessibility ── */
     a:focus-visible, button:focus-visible { outline: 2px solid var(--red-hi); outline-offset: 3px; border-radius: 4px; }
     .skip { position: absolute; top: -100%; left: 16px; z-index: 9999; background: var(--red); color: #fff; padding: 8px 16px; border-radius: 8px; font-weight: 700; font-size: .85rem; transition: top .2s ease; text-decoration: none; }
@@ -562,11 +592,25 @@
       Método Switch — Tu contenido del mes listo en <em>1 tarde</em>, sin ser experto hablándole a la IA
     </h1>
 
-    <p class="hero-sub up d2">
+    <div class="hero-video-wrap up d2">
+      <div class="hero-video-outer">
+        <span class="hud-tl" aria-hidden="true"></span>
+        <span class="hud-br" aria-hidden="true"></span>
+        <video
+          class="hero-video"
+          src="hero-video.mp4"
+          autoplay muted loop playsinline
+          preload="auto"
+          aria-hidden="true"
+        ></video>
+      </div>
+    </div>
+
+    <p class="hero-sub up d3">
       Clase en vivo donde demuestro en tiempo real cómo crear 30 días de contenido en una sola tarde usando IA — con una demo en vivo para alguien del público.
     </p>
 
-    <div class="hero-meta up d3">
+    <div class="hero-meta up d4">
       <span class="date-chip">
         <svg width="13" height="13" viewBox="0 0 16 16" fill="none" aria-hidden="true">
           <rect x="1.5" y="2.5" width="13" height="12" rx="2.5" stroke="currentColor" stroke-width="1.4"/>
@@ -584,7 +628,7 @@
       </div>
     </div>
 
-    <div class="btn-wrap up d4">
+    <div class="btn-wrap up d5">
       <a href="https://chat.whatsapp.com/LKlt7m2hPDYL85AOeHkSjM?mode=hq2tcli" target="_blank" rel="noopener noreferrer" class="btn" aria-label="Únete al grupo de WhatsApp para recibir el link de la clase">
         <span class="btn-label">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true" style="flex-shrink:0">
@@ -753,7 +797,18 @@
       <span class="hud-br" aria-hidden="true"></span>
       <div class="spk-in">
         <div class="av-ring" aria-hidden="true">
-          <div class="av-core" id="avatar"><img src="avatar.jpg" alt="El Rapero Marketero" /></div>
+          <div class="av-core" id="avatar">
+            <svg width="36" height="36" viewBox="0 0 36 36" fill="none" aria-hidden="true">
+              <!-- cap brim -->
+              <path d="M4 22h28" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+              <!-- cap body -->
+              <path d="M6 22C6 22 7 12 18 12C29 12 30 22 30 22" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+              <!-- button on top -->
+              <circle cx="18" cy="12" r="1.5" fill="currentColor" opacity=".7"/>
+              <!-- brim extension -->
+              <path d="M4 22C2 22 2 24 4 24H22" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+            </svg>
+          </div>
         </div>
         <div class="sp-info">
           <h3 id="h-speaker">El Rapero Marketero</h3>
